@@ -21,3 +21,10 @@ Crear un servicio sin pruebas unitarias
 nest g service tasks --no-spec
 ```
 
+Crear una instancia de postgresSQL con docker
+```
+docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+```
+
+
+
