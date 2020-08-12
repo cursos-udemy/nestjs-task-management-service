@@ -1,0 +1,9 @@
+database:
+  host: 'localhost'
+  username: 'postgres'
+  password: 'postgres'
+  sinchronize: true
+
+security:
+  token:
+    secret: 'jendrix2020'

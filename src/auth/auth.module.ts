@@ -6,17 +6,19 @@ import { UserRepository } from './user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
+import * as config from 'config';
+
+const configSecurity = config.get('security')
 
 @Module({
   imports: [
     PassportModule.register({
-      defaultStrategy: 'jwt',
+      defaultStrategy: configSecurity.strategy,
     }),
     JwtModule.register({
-      //TODO: read to properties file/env
-      secret: 'jendrix2020',
+      secret: process.env.JWT_SECRET || configSecurity.token.secret,
       signOptions: {
-        expiresIn: 3600,
+        expiresIn: configSecurity.token.expiresIn,
       },
     }),
     TypeOrmModule.forFeature([UserRepository]),

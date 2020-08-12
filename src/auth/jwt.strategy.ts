@@ -6,6 +6,9 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import { User } from './user.entity';
+import * as config from 'config';
+
+const configSecurity = config.get('security')
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,8 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(@InjectRepository(UserRepository) private userRepository: UserRepository) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      //TODO: read to properties file/env
-      secretOrKey: 'jendrix2020',
+      secretOrKey: process.env.JWT_SECRET || configSecurity.token.secret,
       ignoreExpiration: false,
     });
   }

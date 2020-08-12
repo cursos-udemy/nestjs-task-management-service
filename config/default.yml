@@ -1,0 +1,14 @@
+server:
+  port: 3000
+
+database:
+  type: 'postgres'
+  port: 5432
+  name: 'task_management'
+  sinchronize: false
+
+security:
+  strategy: 'jwt'
+  token:
+    expiresIn: 3600
+
